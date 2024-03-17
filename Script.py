@@ -10,6 +10,7 @@ app.secret_key = "super secret key"
 # Initialize the text-to-speech engine
 engine = pyttsx3.init()
 ai_number = 0
+path_to_audio_file_or_audio_stream = "Hackathon_UM-main/usermanagement/identity-personification_synthetic-audio-train_audio_file (2).wav"
 
 # Initialize the speech config for Azure Open AI speech service
 speech_config = speechsdk.SpeechConfig(subscription="7e23ef5547644534b78b21fc8c15aa7b", region="eastus2")
@@ -25,16 +26,18 @@ def generate_random_number():
     return random.randint(1, 10000)
 
 
-# Function to generate AI-generated voice using Azure Open AI speech service
-def ai_voice(text):
+# Function to generate AI-generated voice using Azure OpenAI speech service
+def ai_voice(number):
     engine.setProperty('rate', 200)
-    engine.say(text)
+    engine.say(f"Your number is {number}")
     engine.runAndWait()
 
 
 # Function to recognize human voice using Azure Open AI speech service
 def recognize_human_voice():
-    with open("path_to_audio_file_or_audio_stream", "rb") as audio_file:
+    print("Processing your data")
+    audio_input = speechsdk.AudioConfig(filename=path_to_audio_file_or_audio_stream)
+    with open(path_to_audio_file_or_audio_stream, "rb") as audio_file:
         audio_data = audio_file.read()
 
     audio_input = speechsdk.AudioDataStream(audio_data)
@@ -63,9 +66,9 @@ def generate():
     return render_template('generate.html')
 
 
-@app.route('/voicetest', methods=['POST'])
+@app.route('/voicetest', methods=['GET', 'POST'])
 def voicetest():
-    # Recognize human voice using Azure Open AI speech service
+    # Recognize human voice using Azure Cognitive Services Speech SDK
     human_voice = recognize_human_voice()
 
     # Check if the recognized text matches the expected pattern and proceed accordingly
@@ -73,7 +76,7 @@ def voicetest():
         if human_voice.lower() == "guess the number":
             return render_template('guess.html', ai_number=ai_number)
 
-    return render_template('generate.html')
+return render_template('generate.html')
 
 
 if __name__ == '__main__':
