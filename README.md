@@ -33,6 +33,13 @@ The response will be allowing you to login if the invout voice is validated and 
 * Openai
   * Whisper - speech-to-text
 * pyttsx3 library for text-to-speech
+* Model_version:  "openai-whisper-large-v3-1" 
+
+openai_Model ID = "azureml://registries/azureml/models/openai-whisper-large-v3/versions/1"
+
+Endpoint_URL = "https://project-codeiam-iam.eastus2.inference.ml.azure.com/score"
+
+Swagger_URL = "https://project-codeiam-iam.eastus2.inference.ml.azure.com/swagger.json"
 
 # License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

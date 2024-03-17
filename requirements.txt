@@ -8,3 +8,10 @@ pydub
 audio_segment
 pyttsx3
 flask
+python-multipart
+fastapi
+ping
+json
+requests
+regex
+
