@@ -1,0 +1,10 @@
+
+Speech-Recognition
+azure-cognitiveservices-speech
+os
+random
+pyaudio
+pydub
+audio_segment
+pyttsx3
+flask
