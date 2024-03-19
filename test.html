@@ -39,7 +39,8 @@
     <table id="checklist">
       <thead>
         <tr>
-          <th>Item</th><th>Date</th>
+          <th>Item</th>
+          <th>Date</th>
           <th>Remarks</th>
           <th>Status</th>
         </tr>
@@ -50,7 +51,7 @@
     <button id="displayBtn">Display Checklist</button>
     <div id="displayArea"></div>
     <script>
-      // Get a reference to the checklist table
+      // Get a referenceto the checklist table
       var checklistTable = document.getElementById("checklist");
 
       // Get a reference to the form element
@@ -102,7 +103,7 @@
             statusCell.textContent = "In Progress";
           } else if (status === "in-progress") {
             statusCell.textContent = "Completed";
-          } else if (status === "completed") {
+          } else if (status === "completed"){
             statusCell.textContent = "Pending";
           }
         });
@@ -165,37 +166,40 @@
 
         // Append the display table to the display area
         displayArea.appendChild(displayTable);
-      });
-
-      // Read the existing checklist.html file and add its contents to the checklist table
+      });// Read the existing checklist.html file and add its contents to the checklist table
       function readChecklistFile() {
-        // Create a new FileReader object
-        var reader = new FileReader();
+        // Create a new XMLHttpRequest object
+        var request = new XMLHttpRequest();
 
-        // Set the onload event handler for the FileReader object
-        reader.onload = function() {
-          // Get the HTML content of the checklist table from the FileReader object
-          var checklistHtml = reader.result;
+        // Set the onload event handler for the XMLHttpRequest object
+        request.onload = function() {
+          if (request.status === 200) {
+            // Get the HTML content of the checklist table from the XMLHttpRequest object
+            var checklistHtml = request.responseText;
 
-          // Create a new table element from the HTML content
-          var checklistTable = document.createElement("table");
-          checklistTable.innerHTML = checklistHtml;
+            // Create a new table element from the HTML content
+            var checklistTable = document.createElement("table");
+            checklistTable.innerHTML = checklistHtml;
 
-          // Get the table body element from the new table
-          var tableBody = checklistTable.querySelector("tbody");
+            // Get the table body element from the new table
+            var tableBody = checklistTable.querySelector("tbody");
 
-          // Get the table body element from the existing checklist table
-          var existingTableBody = document.querySelector("#checklist tbody");
+            // Get the table body element from the existing checklist table
+            var existingTableBody = document.querySelector("#checklist tbody");
 
-          // Clone the nodes from the new table body and append them to the existing table body
-          var newNodes = tableBody.childNodes;
-          for (var i = 0; i < newNodes.length; i++) {
-            existingTableBody.appendChild(newNodes[i].cloneNode(true));
+            // Clone the nodes from the new table body and append them to the existing table body
+            var newNodes = tableBody.childNodes;
+            for (var i = 0; i < newNodes.length; i++) {
+              existingTableBody.appendChild(newNodes[i].cloneNode(true));
+            }
           }
         };
 
-        // Read the checklist.html file
-        reader.readAsText(new File([""], "checklist.html"));
+        // Open a request to read the checklist.html file
+        request.open("GET", "checklist.html", true);
+
+        // Send the request
+        request.send();
       }
 
       // Call the readChecklistFile function when the window loads
