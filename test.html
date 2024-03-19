@@ -39,8 +39,7 @@
     <table id="checklist">
       <thead>
         <tr>
-          <th>Item</th>
-          <th>Date</th>
+          <th>Item</th><th>Date</th>
           <th>Remarks</th>
           <th>Status</th>
         </tr>
@@ -51,109 +50,57 @@
     <button id="displayBtn">Display Checklist</button>
     <div id="displayArea"></div>
     <script>
-      //Get a reference to the checkGet a reference to the checklist table
-      varlist table
-      var checklistTable = document.getElementById(" checklistTable = document.getElementById("checklist");
+      // Get a reference to the checklist table
+      var checklistTable = document.getElementById("checklist");
 
       // Get a reference to the form element
-      var formchecklist");
-
-      // Get a reference to the form = document.getElementById("checklistForm");
-
-      // Add a submit event listener to the form
-      form.addEventListener(" element
       var form = document.getElementById("checklistForm");
 
       // Add a submit event listener to the form
-      form.addEventListener("submit", function(eventsubmit", function(event) {
+      form.addEventListener("submit", function(event) {
         // Prevent the form from submitting normally
         event.preventDefault();
 
         // Get the values of the form fields
         var item = document.getElementById("item").value;
-        var date) {
-        // Prevent the form from submitting normally
-        event.preventDefault();
-
-        // Get the values of the form fieldsInput = document.getElementById("date");
+        var dateInput = document.getElementById("date");
         var date = new Date(dateInput.value);
-       
-        var item = document.getElementById("item").value;
-        var date var dateString = date.toLocaleDateString("en-US", { year: "numeric", month: "2Input = document.getElementById-digit", day: "2-digit" });
-        var remarks = document.getElementById("remarks").value("date");
-        var date = new Date(dateInput.value);
-        var dateString = date.toLocaleDateString(";
-        var status = document.getElementById("status").value;
-
-        // Create a new table row
-        var row = document.createElement("en-US", { year: "numeric", month: "2-digit", day: "2-digit" });
-        var remarks = document.trgetElementById("remarks").value;
+        var dateString = date.toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" });
+        var remarks = document.getElementById("remarks").value;
         var status = document.getElementById("status").value;
 
         // Create a new table row
         var row = document.createElement("tr");
 
-        // Create a new table cell for the item");
-
         // Create a new table cell for the item
         var itemCell = document.createElement("td");
-        itemCell.textContent
-        var itemCell = document.createElement("td");
-        itemCell.textContent = item = item;
-        row.appendChild(itemCell);
-
-        // Create a new table cell for;
+        itemCell.textContent = item;
         row.appendChild(itemCell);
 
         // Create a new table cell for the date
         var dateCell = document.createElement("td");
-        dateCell.textContent = dateString the date
-        var dateCell = document.createElement("td");
         dateCell.textContent = dateString;
         row.appendChild(dateCell);
 
-        // Create a new table cell for;
-        row.appendChild(dateCell);
-
-        // Create a new table cell for the remarks the remarks
-        var remarksCell = document.createElement("td");
-        remarksCell.textContent = remarks;
-        row.appendChild(remarksCell
+        // Create a new table cell for the remarks
         var remarksCell = document.createElement("td");
         remarksCell.textContent = remarks;
         row.appendChild(remarksCell);
 
         // Create a new table cell for the status
         var statusCell = document.createElement("td");
-        status);
-
-        // Create a new table cell for the statusCell.textContent = status;
-        row.appendChild(statusCell);
-
-        // Add a click event listener
-        var statusCell = document.createElement("td");
         statusCell.textContent = status;
-        row.appendChild(statusCell to the status cell
-        statusCell.addEventListener("click", function());
+        row.appendChild(statusCell);
 
         // Add a click event listener to the status cell
         statusCell.addEventListener("click", function() {
           // Toggle the "done" class on the row
           row.classList.toggle("done");
 
-          // Update the {
-          // Toggle the "done" class on the row
-          row.classList.toggle("done");
-
           // Update the status of the checklist item
-          if (status status of the checklist item
-          if (status === "pending") { === "pending") {
-            statusCell.textContent = "In Progress";
-          } else if (status ===
+          if (status === "pending") {
             statusCell.textContent = "In Progress";
           } else if (status === "in-progress") {
-            statusCell.textContent = "Completed";
-          } else if (status === " "in-progress") {
             statusCell.textContent = "Completed";
           } else if (status === "completed") {
             statusCell.textContent = "Pending";
@@ -217,7 +164,44 @@
         displayArea.innerHTML = "";
 
         // Append the display table to the display area
-        displayArea.appendChild(displayTable);});
+        displayArea.appendChild(displayTable);
+      });
+
+      // Read the existing checklist.html file and add its contents to the checklist table
+      function readChecklistFile() {
+        // Create a new FileReader object
+        var reader = new FileReader();
+
+        // Set the onload event handler for the FileReader object
+        reader.onload = function() {
+          // Get the HTML content of the checklist table from the FileReader object
+          var checklistHtml = reader.result;
+
+          // Create a new table element from the HTML content
+          var checklistTable = document.createElement("table");
+          checklistTable.innerHTML = checklistHtml;
+
+          // Get the table body element from the new table
+          var tableBody = checklistTable.querySelector("tbody");
+
+          // Get the table body element from the existing checklist table
+          var existingTableBody = document.querySelector("#checklist tbody");
+
+          // Clone the nodes from the new table body and append them to the existing table body
+          var newNodes = tableBody.childNodes;
+          for (var i = 0; i < newNodes.length; i++) {
+            existingTableBody.appendChild(newNodes[i].cloneNode(true));
+          }
+        };
+
+        // Read the checklist.html file
+        reader.readAsText(new File([""], "checklist.html"));
+      }
+
+      // Call the readChecklistFile function when the window loads
+      window.addEventListener("load", function() {
+        readChecklistFile();
+      });
     </script>
   </body>
 </html>
