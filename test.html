@@ -47,7 +47,9 @@
 
         // Get the values of the form fields
         var item = document.getElementById("item").value;
-        vardate = document.getElementById("date").value;
+        var dateInput = document.getElementById("date");
+        var date = new Date(dateInput.value);
+        var dateString = date.toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" });
         var remarks = document.getElementById("remarks").value;
         var status = document.getElementById("status").value;
 
@@ -61,7 +63,7 @@
 
         // Create a new table cell for the date
         var dateCell = document.createElement("td");
-        dateCell.textContent = date;
+        dateCell.textContent = dateString;
         row.appendChild(dateCell);
 
         // Create a new table cell for the remarks
@@ -85,14 +87,14 @@
 
         // Clear the form fields
         document.getElementById("item").value = "";
-        document.getElementById("date").value = "";
+        dateInput.value = "";
         document.getElementById("remarks").value = "";
         document.getElementById("status").value = "pending";
       });
 
       // Add a click event listener to the save button
       document.getElementById("saveBtn").addEventListener("click", function() {
-        // Create a new Blob object with the checklist data
+// Create a new Blob object with the checklist data
         var data = new Blob([checklistTable.outerHTML], {type: "text/html"});
 
         // Create a new URL object for the Blob
@@ -103,63 +105,7 @@
         a.href = url;
         a.download = "checklist.html";
 
-        // Simulate a click on the anchor element to download thedate = document.getElementById("date").value;
-        var remarks = document.getElementById("remarks").value;
-        var status = document.getElementById("status").value;
-
-        // Create a new table row
-        var row = document.createElement("tr");
-
-        // Create a new table cell for the item
-        var itemCell = document.createElement("td");
-        itemCell.textContent = item;
-        row.appendChild(itemCell);
-
-        // Create a new table cell for the date
-        var dateCell = document.createElement("td");
-        dateCell.textContent = date;
-        row.appendChild(dateCell);
-
-        // Create a new table cell for the remarks
-        var remarksCell = document.createElement("td");
-        remarksCell.textContent = remarks;
-        row.appendChild(remarksCell);
-
-        // Create a new table cell for the status
-        var statusCell = document.createElement("td");
-        statusCell.textContent = status;
-        row.appendChild(statusCell);
-
-        // Add a click event listener to the status cell
-        statusCell.addEventListener("click", function() {
-          // Toggle the "done" class on the row
-          row.classList.toggle("done");
-        });
-
-        // Add the row to the table
-        checklistTable.querySelector("tbody").appendChild(row);
-
-        // Clear the form fields
-        document.getElementById("item").value = "";
-        document.getElementById("date").value = "";
-        document.getElementById("remarks").value = "";
-        document.getElementById("status").value = "pending";
-      });
-
-      // Add a click event listener to the save button
-      document.getElementById("saveBtn").addEventListener("click", function() {
-        // Create a new Blob object with the checklist data
-        var data = new Blob([checklistTable.outerHTML], {type: "text/html"});
-
-        // Create a new URL object for the Blob
-        var url = URL.createObjectURL(data);
-
-        // Create a new anchor element with the URL
-        var a = document.createElement("a");
-        a.href = url;
-        a.download = "checklist.html";
-
-        // Simulate a click on the anchor element to download thefile
+        // Simulate a click on the anchor element to download the file
         a.click();
 
         // Revoke the URL object
