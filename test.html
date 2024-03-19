@@ -2,6 +2,21 @@
 <html>
   <head>
     <title>HTML Checklist</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        border: 1px solid black;
+      }
+
+      th, td {
+        border: 1px solid black;
+        padding: 5px;
+      }
+
+      .done {
+        text-decoration: line-through;
+      }
+    </style>
   </head>
   <body>
     <h1>HTML Checklist</h1>
@@ -92,9 +107,7 @@
         });
 
         // Add the row to the table
-        checklistTable.querySelector("tbody").appendChild(row);
-
-        // Clear the form fields
+        checklistTable.querySelector("tbody").appendChild(row);// Clear the form fields
         document.getElementById("item").value = "";
         dateInput.value = "";
         document.getElementById("remarks").value = "";
@@ -104,7 +117,7 @@
       // Get a reference to the save button
       var saveBtn = document.getElementById("saveBtn");
 
-      // Add a click event listener to thesave button
+      // Add a click event listener to the save button
       saveBtn.addEventListener("click", function() {
         // Create a new Blob object with the checklist data
         var data = new Blob([checklistTable.outerHTML], {type:"text/html"});
@@ -151,10 +164,5 @@
         displayArea.appendChild(displayTable);
       });
     </script>
-    <style>
-      .done {
-        text-decoration: line-through;
-      }
-    </style>
   </body>
 </html>
