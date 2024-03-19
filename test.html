@@ -33,6 +33,8 @@
       <tbody></tbody>
     </table>
     <button id="saveBtn">Save Checklist</button>
+    <button id="displayBtn">Display Checklist</button>
+    <div id="displayArea"></div>
     <script>
       // Get a reference to the checklist table
       var checklistTable = document.getElementById("checklist");
@@ -80,6 +82,13 @@
         statusCell.addEventListener("click", function() {
           // Toggle the "done" class on the row
           row.classList.toggle("done");
+
+          // Update the status of the checklist item
+          if (status === "pending") {
+            statusCell.textContent = "In Progress";
+          } else if (status === "in-progress") {
+            statusCell.textContent = "Completed";
+          }
         });
 
         // Add the row to the table
@@ -92,30 +101,92 @@
         document.getElementById("status").value = "pending";
       });
 
+      // Get a reference to the save button
+var saveBtn = document.getElementById("saveBtn");
+
       // Add a click event listener to the save button
-      document.getElementById("saveBtn").addEventListener("click", function() {
-// Create a new Blob object with the checklist data
-        var data = new Blob([checklistTable.outerHTML], {type: "text/html"});
+      saveBtn.addEventListener("click", function() {
+        // Create a new Blob object with the checklist data
+        var data = new Blob([checklistTable.outerHTML], {type:"text/html"});
 
         // Create a new URL object for the Blob
         var url = URL.createObjectURL(data);
 
         // Create a new anchor element with the URL
-        var a = document.createElement("a");
+var saveBtn = document        var a = document.createElement("a");
         a.href = url;
         a.download = "checklist.html";
 
-        // Simulate a click on the anchor element to download the file
+        // Simulate a click.getElementById("saveBtn");
+
+      // on the anchor element to download the file
+        a.click();
+
+        // Revoke Add a click event listener to the save button
+      saveBtn.addEventListener("click", function() {
+ the URL object
+        URL.revokeObjectURL(url);
+      });
+
+             // Create a new // Get a reference to the display button
+      var displayBtn = document.getElementById("displayBtn Blob object with the check");
+
+      // Add a click event listener to the displaylist data
+        var data = new Blob button
+      displayBtn.addEventListener("click", function() {
+        // Get the HTML content of the checklist table
+        var checklistHtml = checklistTable.outerHTML;
+
+        // Create a new table element
+        var display([checklistTable.Table = document.createElement("table");
+
+        // Set the ID of the display table
+        displayTable.id = "displayTable";outerHTML], {type
+
+        // Set:"text/html"});
+
+        // Create a new URL object for the Blob
+        var url = URL.createObjectURL the inner HTML of the(data);
+
+        // Create a new anchor element with the URL
+ display table to the checklist HTML
+        displayTable.        var a = document.createElement("innerHTML = checklistHtml;
+
+        // Get a reference to the display area
+        var displayArea = document.getElementById("displayArea");a");
+        a.href = url;
+        a.download = "checklist.
+
+        // Remove any existing content in the display area
+        displayArea.innerHTML = "";
+
+        // Append the display table to the display area
+        displayArea.appendChild(displayTable);
+      });
+    </script>html";
+
+       
+    <style>
+      .done { // Simulate a click on the anchor element to
+        text-decoration: line-through;
+      }
+    </style>
+  </body>
+ download the file
         a.click();
 
         // Revoke the URL object
         URL.revokeObjectURL(url);
       });
-    </script>
-    <style>
-      .done {
-        text-decoration: line-through;
-      }
-    </style>
-  </body>
-</html>
+
+      // Get a reference to</html>
+
+
+
+  // Add a click event listener to the display button
+  displayBtn.addEventListener("click", function() {
+    // Get the HTML content of the the checklist item is "pending", it is updated to "In Progress". If the status is "in-progress", it is updated to "Completed".
+
+
+
+      
