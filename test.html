@@ -51,63 +51,119 @@
     <button id="displayBtn">Display Checklist</button>
     <div id="displayArea"></div>
     <script>
-      // Get a reference to the checklist table
-      var checklistTable = document.getElementById("checklist");
+      //Get a reference to the checkGet a reference to the checklist table
+      varlist table
+      var checklistTable = document.getElementById(" checklistTable = document.getElementById("checklist");
 
       // Get a reference to the form element
+      var formchecklist");
+
+      // Get a reference to the form = document.getElementById("checklistForm");
+
+      // Add a submit event listener to the form
+      form.addEventListener(" element
       var form = document.getElementById("checklistForm");
 
       // Add a submit event listener to the form
-      form.addEventListener("submit", function(event) {
+      form.addEventListener("submit", function(eventsubmit", function(event) {
         // Prevent the form from submitting normally
         event.preventDefault();
 
         // Get the values of the form fields
         var item = document.getElementById("item").value;
-        var dateInput = document.getElementById("date");
+        var date) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Get the values of the form fieldsInput = document.getElementById("date");
         var date = new Date(dateInput.value);
-        var dateString = date.toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" });
-        var remarks = document.getElementById("remarks").value;
+       
+        var item = document.getElementById("item").value;
+        var date var dateString = date.toLocaleDateString("en-US", { year: "numeric", month: "2Input = document.getElementById-digit", day: "2-digit" });
+        var remarks = document.getElementById("remarks").value("date");
+        var date = new Date(dateInput.value);
+        var dateString = date.toLocaleDateString(";
+        var status = document.getElementById("status").value;
+
+        // Create a new table row
+        var row = document.createElement("en-US", { year: "numeric", month: "2-digit", day: "2-digit" });
+        var remarks = document.trgetElementById("remarks").value;
         var status = document.getElementById("status").value;
 
         // Create a new table row
         var row = document.createElement("tr");
 
+        // Create a new table cell for the item");
+
         // Create a new table cell for the item
         var itemCell = document.createElement("td");
-        itemCell.textContent = item;
+        itemCell.textContent
+        var itemCell = document.createElement("td");
+        itemCell.textContent = item = item;
+        row.appendChild(itemCell);
+
+        // Create a new table cell for;
         row.appendChild(itemCell);
 
         // Create a new table cell for the date
         var dateCell = document.createElement("td");
+        dateCell.textContent = dateString the date
+        var dateCell = document.createElement("td");
         dateCell.textContent = dateString;
         row.appendChild(dateCell);
 
-        // Create a new table cell for the remarks
+        // Create a new table cell for;
+        row.appendChild(dateCell);
+
+        // Create a new table cell for the remarks the remarks
+        var remarksCell = document.createElement("td");
+        remarksCell.textContent = remarks;
+        row.appendChild(remarksCell
         var remarksCell = document.createElement("td");
         remarksCell.textContent = remarks;
         row.appendChild(remarksCell);
 
         // Create a new table cell for the status
         var statusCell = document.createElement("td");
-        statusCell.textContent = status;
+        status);
+
+        // Create a new table cell for the statusCell.textContent = status;
         row.appendChild(statusCell);
+
+        // Add a click event listener
+        var statusCell = document.createElement("td");
+        statusCell.textContent = status;
+        row.appendChild(statusCell to the status cell
+        statusCell.addEventListener("click", function());
 
         // Add a click event listener to the status cell
         statusCell.addEventListener("click", function() {
           // Toggle the "done" class on the row
           row.classList.toggle("done");
 
+          // Update the {
+          // Toggle the "done" class on the row
+          row.classList.toggle("done");
+
           // Update the status of the checklist item
-          if (status === "pending") {
+          if (status status of the checklist item
+          if (status === "pending") { === "pending") {
+            statusCell.textContent = "In Progress";
+          } else if (status ===
             statusCell.textContent = "In Progress";
           } else if (status === "in-progress") {
             statusCell.textContent = "Completed";
+          } else if (status === " "in-progress") {
+            statusCell.textContent = "Completed";
+          } else if (status === "completed") {
+            statusCell.textContent = "Pending";
           }
         });
 
         // Add the row to the table
-        checklistTable.querySelector("tbody").appendChild(row);// Clear the form fields
+        checklistTable.querySelector("tbody").appendChild(row);
+
+        // Clear the form fields
         document.getElementById("item").value = "";
         dateInput.value = "";
         document.getElementById("remarks").value = "";
@@ -161,8 +217,7 @@
         displayArea.innerHTML = "";
 
         // Append the display table to the display area
-        displayArea.appendChild(displayTable);
-      });
+        displayArea.appendChild(displayTable);});
     </script>
   </body>
 </html>
