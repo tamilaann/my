@@ -1,0 +1,22 @@
+$folderPath = "\\RemoteComputerName\C$\Path\To\Folder"
+
+# Get the list of files and folders in the specified path
+$fileSystemItems = Get-ChildItem -Path $folderPath -Recurse
+
+# Loop through each file and folder
+foreach ($fileSystemItem in $fileSystemItems) {
+    # Check if the current item is a file
+    if ($fileSystemItem -is [System.IO.FileInfo]) {
+        # Print the name, version, date created, and date modified of the file
+        Write-Host "File: $($fileSystemItem.FullName)"
+        Write-Host "Version: $($fileSystemItem.VersionInfo.FileVersion)"
+        Write-Host "Date Created: $($fileSystemItem.CreationTime)"
+        Write-Host "Date Modified: $($fileSystemItem.LastWriteTime)"
+    }
+    # Check if the current item is a folder
+    elseif ($fileSystemItem -is [System.IO.DirectoryInfo]) {
+        # Print the name and date modified of the folder
+        Write-Host "Folder: $($fileSystemItem.FullName)"
+        Write-Host "Date Modified: $($fileSystemItem.LastWriteTime)"
+    }
+}
